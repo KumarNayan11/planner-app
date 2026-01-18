@@ -7,6 +7,8 @@ import WeekEditor from "@/components/planner/WeekEditor";
 import WeeklyProgress from "@/components/planner/WeeklyProgress";
 import DaysPreview from "@/components/planner/DaysPreview";
 import HabitTracker from "@/components/planner/HabitTracker";
+import WeeklyDonutChart from "@/components/planner/WeeklyDonutChart";
+import WeeklyBarChart from "@/components/planner/WeeklyBarChart";
 
 export default function Home() {
   const [week, setWeek] = useState<Week | null>(null);
@@ -31,7 +33,10 @@ export default function Home() {
       <h1 className="text-2xl font-bold">Weekly Planner</h1>
 
       <WeekEditor week={week} />
-      <WeeklyProgress weekId={week.id} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <WeeklyDonutChart weekId={week.id} />
+        <WeeklyBarChart weekId={week.id} />
+      </div>
       <HabitTracker weekId={week.id} />
       <DaysPreview weekId={week.id} />
     </main>
