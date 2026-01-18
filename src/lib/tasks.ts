@@ -8,11 +8,14 @@ import {
   doc,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { Task } from "@/types/task";
+import { Task, TaskWithId } from "@/types/task";
 
 const USER_ID = "local-user";
 
-export async function getTasksForDay(weekId: string, day: string) {
+export async function getTasksForDay(
+  weekId: string,
+  day: string
+): Promise<TaskWithId[]> {
   const q = query(
     collection(db, "tasks"),
     where("userId", "==", USER_ID),
@@ -23,7 +26,10 @@ export async function getTasksForDay(weekId: string, day: string) {
   const snapshot = await getDocs(q);
 
   return snapshot.docs.map(
-    (doc) => ({ id: doc.id, ...(doc.data() as Task) })
+    (doc): TaskWithId => ({
+      id: doc.id,
+      ...(doc.data() as Task),
+    })
   );
 }
 

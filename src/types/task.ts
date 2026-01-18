@@ -1,10 +1,13 @@
 export interface Task {
-  id: string;
   userId: string;
   weekId: string;
-  day: string; // "mon", "tue", etc
+  day: string;
 
   title: string;
   completed: boolean;
   createdAt: Date;
+}
+
+export interface TaskWithId extends Task {
+  id: string;
 }
