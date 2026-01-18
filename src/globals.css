@@ -1,5 +1,7 @@
 :root {
-  --green-main: #6aa84f;
-  --green-light: #eaf4e2;
-  --green-muted: #cfe3c2;
+  --green-light: #f0fdfa;
+  --green-soft:  #ccfbf1;
+  --green-main:  #14b8a6;
+  --green-dark:  #0f766e;
+  --green-accent:#2dd4bf;
 }

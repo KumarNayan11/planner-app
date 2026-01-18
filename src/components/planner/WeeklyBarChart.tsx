@@ -25,17 +25,17 @@ export default function WeeklyBarChart({
   }, [weekId]);
 
   return (
-    <div className="bg-white rounded-lg shadow p-4">
-      <p className="text-sm text-gray-500 mb-2">
+    <div className="bg-blue-50 rounded-lg shadow-lg p-6 border border-blue-100">
+      <h3 className="text-base font-semibold text-gray-800 mb-4">
         Daily Completion
-      </p>
+      </h3>
 
-      <ResponsiveContainer width="100%" height={200}>
+      <ResponsiveContainer width="100%" height={200} aria-label="Bar chart showing daily completion percentages for the week">
         <BarChart data={data}>
           <XAxis dataKey="day" />
           <YAxis domain={[0, 100]} />
           <Tooltip />
-          <Bar dataKey="value" radius={[6, 6, 0, 0]} />
+          <Bar dataKey="value" fill="#3b82f6" radius={[6, 6, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -16,11 +16,11 @@ export default function DayPage() {
     getOrCreateCurrentWeek().then(setWeek);
   }, []);
 
-  if (!week) return <div className="p-6">Loading...</div>;
+  if (!week) return <div className="p-8 text-center text-gray-600" aria-live="polite">Loading...</div>;
 
   return (
-    <main className="max-w-2xl mx-auto p-6 space-y-4">
-      <h1 className="text-2xl font-bold">
+    <main className="max-w-2xl mx-auto bg-blue-50 rounded-xl shadow-lg p-8 space-y-6 border border-blue-100">
+      <h1 className="text-3xl font-bold text-gray-800 mb-4">
         {day.toUpperCase()}
       </h1>
 

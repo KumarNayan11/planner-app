@@ -25,52 +25,58 @@ export default function WeekEditor({ week }: { week: Week }) {
   }
 
   return (
-    <section className="bg-[var(--green-light)] rounded-xl shadow-md p-5 space-y-4">
-      <h2 className="text-lg font-semibold text-gray-700">
+    <section className="bg-blue-50 rounded-xl shadow-lg p-6 space-y-6 border border-blue-100">
+      <h2 className="text-xl font-semibold text-gray-800">
         This Week
       </h2>
 
       {/* Weekly Focus */}
       <input
-        className="w-full border border-green-300 p-2 rounded-md
-                   focus:outline-none focus:ring-2 focus:ring-green-400
-                   bg-white"
+        className="w-full border border-gray-300 p-3 rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                   bg-white text-gray-900 placeholder-gray-500"
         placeholder="Weekly focus"
         value={focus}
         onChange={(e) => setFocus(e.target.value)}
+        aria-label="Enter your weekly focus"
       />
 
       {/* Reward */}
       <input
-        className="w-full border border-green-300 p-2 rounded-md
-                   focus:outline-none focus:ring-2 focus:ring-green-400
-                   bg-white"
+        className="w-full border border-gray-300 p-3 rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                   bg-white text-gray-900 placeholder-gray-500"
         placeholder="Reward"
         value={reward}
         onChange={(e) => setReward(e.target.value)}
+        aria-label="Enter your reward for completing the week"
       />
 
       {/* Affirmation */}
       <input
-        className="w-full border border-green-300 p-2 rounded-md
-                   focus:outline-none focus:ring-2 focus:ring-green-400
-                   bg-white"
+        className="w-full border border-gray-300 p-3 rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                   bg-white text-gray-900 placeholder-gray-500"
         placeholder="Affirmation"
         value={affirmation}
         onChange={(e) => setAffirmation(e.target.value)}
+        aria-label="Enter your weekly affirmation"
       />
 
       {/* Save Button */}
       <button
         onClick={save}
         disabled={saving}
-        className={`px-4 py-2 rounded-lg text-white font-medium transition
+        className={`px-5 py-3 rounded-lg text-white font-medium transition-all duration-200
+          border border-green-700
           ${
             saving
-              ? "bg-[var(--green-main)] opacity-60 cursor-not-allowed"
-              : "bg-[var(--green-main)] hover:opacity-90"
+              ? "bg-green-400 opacity-60 cursor-not-allowed"
+              : "bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           }
         `}
+        aria-label={saving ? "Saving changes..." : "Save weekly settings"}
+        aria-disabled={saving}
       >
         {saving ? "Saving…" : "Save"}
       </button>
