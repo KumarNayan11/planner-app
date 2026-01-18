@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { addTask, getTasksForDay, toggleTask } from "@/lib/tasks";
-import { Task } from "@/types/task";
+import { TaskWithId } from "@/types/task";
 
 export default function TaskList({
   weekId,
@@ -11,7 +11,7 @@ export default function TaskList({
   weekId: string;
   day: string;
 }) {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<TaskWithId[]>([]);
   const [title, setTitle] = useState("");
 
   async function load() {
@@ -66,11 +66,15 @@ export default function TaskList({
                 toggleTask(task.id, !task.completed).then(load)
               }
               className="w-5 h-5 text-green-600 rounded focus:ring-2 focus:ring-blue-500"
-              aria-label={`Mark ${task.title} as ${task.completed ? 'incomplete' : 'complete'}`}
+              aria-label={`Mark ${task.title} as ${
+                task.completed ? "incomplete" : "complete"
+              }`}
             />
             <span
               className={`text-base font-medium ${
-                task.completed ? "line-through text-gray-500" : "text-gray-800"
+                task.completed
+                  ? "line-through text-gray-500"
+                  : "text-gray-800"
               }`}
             >
               {task.title}
