@@ -13,6 +13,7 @@ export default function HabitTracker({
 }) {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [name, setName] = useState("");
+  const [adding, setAdding] = useState(false);
 
   async function load() {
     setHabits(await getHabits(weekId));
@@ -24,52 +25,86 @@ export default function HabitTracker({
 
   async function createHabit() {
     if (!name.trim()) return;
-    await addHabit(weekId, name);
+    setAdding(true);
+    await addHabit(weekId, name.trim());
     setName("");
+    setAdding(false);
     load();
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 space-y-3">
-      <h3 className="font-semibold">Habits</h3>
+    <section className="bg-[var(--green-light)] rounded-xl shadow-md p-5 space-y-5">
+      <h3 className="text-lg font-semibold text-gray-700">
+        Habits
+      </h3>
 
+      {/* Add Habit */}
       <div className="flex gap-2">
         <input
-          className="flex-1 border p-2 rounded"
+          className="flex-1 border border-green-300 p-2 rounded-md
+                     focus:outline-none focus:ring-2 focus:ring-green-400
+                     bg-white"
           placeholder="New habit"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <button
           onClick={createHabit}
-          className="bg-green-600 text-white px-3 rounded"
+          disabled={adding}
+          className={`px-4 rounded-md text-white transition
+            ${
+              adding
+                ? "bg-[var(--green-main)] opacity-60 cursor-not-allowed"
+                : "bg-[var(--green-main)] hover:opacity-90"
+            }
+          `}
         >
           Add
         </button>
       </div>
 
-      {habits.map((habit) => (
-        <div key={habit.id}>
-          <p className="text-sm font-medium">{habit.name}</p>
-          <div className="flex gap-1 mt-1">
-            {DAYS.map((day) => (
-              <button
-                key={day}
-                onClick={() =>
-                  toggleHabitDay(habit.id, day, habit.days).then(load)
-                }
-                className={`w-6 h-6 rounded text-xs ${
-                  habit.days.includes(day)
-                    ? "bg-green-600 text-white"
-                    : "bg-gray-200"
-                }`}
-              >
-                ✓
-              </button>
-            ))}
+      {/* Habit List */}
+      <div className="space-y-4">
+        {habits.map((habit) => (
+          <div key={habit.id}>
+            <p className="text-sm font-medium text-gray-700">
+              {habit.name}
+            </p>
+
+            <div className="flex gap-1 mt-2">
+              {DAYS.map((day) => {
+                const active = habit.days.includes(day);
+
+                return (
+                  <button
+                    key={day}
+                    onClick={() =>
+                      toggleHabitDay(habit.id, day, habit.days).then(load)
+                    }
+                    className={`w-7 h-7 rounded-full text-xs font-semibold
+                      transition
+                      ${
+                        active
+                          ? "bg-[var(--green-main)] text-white"
+                          : "bg-white border border-green-300 text-gray-400"
+                      }
+                    `}
+                    title={day.toUpperCase()}
+                  >
+                    ✓
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+
+        {habits.length === 0 && (
+          <p className="text-sm text-gray-500">
+            No habits added yet.
+          </p>
+        )}
+      </div>
+    </section>
   );
 }
