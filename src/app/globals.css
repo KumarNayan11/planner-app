@@ -1,47 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc; /* Light blue-gray for a fresh, light background */
-  --foreground: #1f2937; /* Dark gray for high contrast text */
+  /* Base layout colors */
+  --background: #f8fafc;   /* light blue-gray */
+  --foreground: #1f2937;   /* dark gray text */
+
+  /* Accent (planner theme) */
+  --green-light: #ecfdf5;
+  --green-soft:  #d1fae5;
+  --green-main:  #22c55e;
+  --green-dark:  #15803d;
+  --green-accent:#4ade80;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-/* Removed dark mode media query to enforce light theme consistency */
-
+/* Global reset */
 *,
 *::before,
 *::after {
-  box-sizing: border-box; /* Ensures consistent sizing and spacing */
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif; /* Prioritize Geist Sans for modern look */
-  line-height: 1.5; /* Improves readability */
-  margin: 0; /* Reset margins for full control */
-  padding: 1rem; /* Adds subtle global padding for spacing */
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 1rem;
 }
 
-/* Global focus styles for accessibility */
+/* Accessibility focus */
 *:focus {
-  outline: 2px solid #3b82f6; /* Blue ring for focus, matching Tailwind's blue-500 */
+  outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
-/* Ensure links are accessible */
+/* Links */
 a {
-  color: #2563eb; /* Blue for links */
+  color: #2563eb;
   text-decoration: underline;
 }
 
 a:hover,
 a:focus {
-  color: #1d4ed8; /* Darker blue on hover/focus */
+  color: #1d4ed8;
 }
