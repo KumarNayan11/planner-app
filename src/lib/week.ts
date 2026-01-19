@@ -16,7 +16,8 @@ export async function getOrCreateCurrentWeek(): Promise<Week> {
 
   if (!snapshot.empty) {
     const doc = snapshot.docs[0];
-    return { id: doc.id, ...(doc.data() as Week) };
+    // Spread data first, then assign id to avoid "specified more than once" error
+    return { ...(doc.data() as Week), id: doc.id };
   }
 
   const newWeek = {
